@@ -44,7 +44,7 @@ RUN uv pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-ur
 
 # Install base dependencies first
 RUN uv pip install "setuptools<81" fastapi uvicorn[standard] python-dotenv python-multipart requests psutil pydub sse-starlette
-
+RUN uv pip install "resemble-perth @ git+https://github.com/resemble-ai/Perth.git"
 # Install chatterbox-tts — with the breaking fix (pkuseg package exclusion) 
 RUN uv pip install git+https://github.com/travisvn/chatterbox-multilingual.git@exp
 
