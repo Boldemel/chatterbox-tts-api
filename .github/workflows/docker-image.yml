@@ -36,4 +36,4 @@ jobs:
           context: .
           file: docker/Dockerfile.uv.gpu
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/jasiam-chatterbox:latest
+          tags: ghcr.io/boldemel/jasiam-chatterbox:latest
