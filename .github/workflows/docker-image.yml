@@ -1,0 +1,39 @@
+name: Build Jasiam Chatterbox GPU Image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/docker-image.yml"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish Jasiam Voice image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile.uv.gpu
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/jasiam-chatterbox:latest
